@@ -21,6 +21,7 @@
 namespace app\api\server;
 
 
+use app\api\logic\LoginLogic;
 use app\common\model\Client_;
 use app\common\model\Notice_;
 use app\common\server\UrlServer;
@@ -76,6 +77,9 @@ class UserServer
                 'user_id' => $user_id,
                 'scene' => Notice_::SYSTEM_REGISTER_SUCCESS,
             ]);
+
+            //注册赠送
+            LoginLogic::registerAward($user_id);
 
             Db::commit();
 
