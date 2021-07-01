@@ -480,6 +480,7 @@ class CouponLogic{
             //领取优惠券的id
             $register_award_coupon = ConfigServer::get('marketing','register_award_coupon',[]);
             if($register_award_coupon){
+                $register_award_coupon = explode(',', $register_award_coupon);
                 $list = Db::name('coupon')
                     ->where(['id'=>$register_award_coupon,'get_type'=>2,'status'=>1,'del'=>0])
                     ->select();
@@ -512,6 +513,7 @@ class CouponLogic{
                     }
                     if($coupon['get_num_type'] !== 1 ){
                         $where[] = ['coupon_id','=',$coupon['id']];
+                        $where[] = ['user_id','=',$user_id];
                         if($coupon['get_num_type'] === 3){
                             list($today_start,$end_start) = Time::today();
                             $where[] = ['create_time','between time',[$today_start,$end_start]];
