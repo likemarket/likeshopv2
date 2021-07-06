@@ -140,7 +140,7 @@ class AfterSale extends Validate
         }
 
         if ($order['order_status'] == \app\common\model\Order::STATUS_FINISH) {
-            $check_time = $order['confirm_take_time'] + ($refund_days * 24 * 60 * 60);
+            $check_time = intval($order['confirm_take_time'] + ($refund_days * 24 * 60 * 60));
             if ($now > $check_time) {
                 return '不在售后时间内';
             }
